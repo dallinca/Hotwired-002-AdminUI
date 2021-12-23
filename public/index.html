@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.png">
+    <link rel="preload" href="<%= BASE_URL %>images/Logo_Icon_Loader.gif" as="image" type="image/gif">
+  	<link rel="stylesheet" href="<%= BASE_URL %>css/normalize.css">
+  	<link rel="stylesheet" href="<%= BASE_URL %>css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,700;1,400&family=Open+Sans&family=Orbitron&family=Staatliches&display=swap" rel="stylesheet">
+    <title>Hotwired Gaming</title>
+    <style id="styleLoader"> .loading { top: 0; left: 0; height: 100%; width: 100%; z-index: 999999; } .loading__wrap { position: fixed; background-color: black; } .loading__image { position: relative; background: url('images/Logo_Icon_Loader.gif') no-repeat center center; } .fadeout.loading__wrap, .fadeout .loading__image { opacity: 0; } </style>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="page-loader" class="loading loading__wrap"><div class="loading loading__image"></div></div>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+
+    <script>
+      (function fn() { // Avoid polluting global namespace
+        // Track time to load
+        let start = Date.now();
+      
+        window.addEventListener("load", function() {
+            let now = Date.now();
+          
+            // Add class to distinguish between touch/non-touch experiences.
+            if (!("ontouchstart" in document.documentElement)) {
+              document.documentElement.classList.add("no-touch");
+            }
+
+            // desired overall css fadeout timings
+            let msFadeDelay = 1000;
+            let msFadeDuration = 300;
+
+            // Calculate Delay to window load event
+            let msDiff = (now - start);
+            let msDelay = (msDiff < msFadeDelay) ? (msFadeDelay - msDiff) : 0;
+
+            // Setup Loader fadeout
+            document.getElementById('styleLoader').innerHTML += '.loading__wrap, .loading__image { transition: opacity .3s ease-in ' + (msDelay / 1000) + 's;}';
+            document.getElementById("page-loader").classList.add("fadeout");
+            setTimeout(() => document.getElementById("page-loader").classList.remove("loading"), msFadeDuration + msDelay);
+        });
+      })();
+      </script>
+  </body>
+</html>
