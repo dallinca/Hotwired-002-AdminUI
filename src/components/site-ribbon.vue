@@ -4,6 +4,7 @@
         <router-link class="image-wrap logo" to="/">
             <img src="/images/Logo_Hotwired_NoPadding.png">
         </router-link>
+        <div id="admin-site-tag"><span>ADMIN</span></div>
         <div></div>
         <nav class="dropdown-menu dropdown-menu--right site-nav"
         v-bind:class="{ tapped: siteNavTapped }"
@@ -180,7 +181,7 @@ body {
 }
 .site-ribbon__wrap {
     display: grid;
-    grid-template-columns: 164px auto 56px 56px;
+    grid-template-columns: 164px auto auto 56px 56px;
     grid-template-rows: 56px;
     justify-items: center;
     align-items: center;
@@ -206,6 +207,15 @@ body {
 .site-ribbon__wrap .logo:focus, .site-ribbon__wrap .logo:hover {
     background-color: var(--brand-color-secondary-lighter);
     outline: none;
+}
+.site-ribbon__wrap #admin-site-tag {
+    display: grid;
+    align-items: end;
+    line-height: 12px;
+}
+.site-ribbon__wrap #admin-site-tag span {
+    padding: 12px 0px;
+    font-weight: 600;
 }
 .dropdown-menu {
     cursor: pointer;
