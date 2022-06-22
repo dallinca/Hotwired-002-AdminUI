@@ -137,7 +137,7 @@ export default {
 					// vueContext.$emit('closeAuth');
 				}
 			};
-			xhttp.open("POST", "/api/v1/site/auth/resetPassword", true);
+			xhttp.open("POST", "/api/v1/admin/auth/resetPassword", true);
 			xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 			xhttp.send(body);
 		},
@@ -154,6 +154,7 @@ export default {
 			this.password = '';
 		},
 		sendEmailVerificationCode: function() {
+			var token = this.$store.getters.authToken;
 			var body = 'email=' + this.email;
 
 			var vueContext = this;
@@ -174,8 +175,9 @@ export default {
 					// vueContext.$emit('closeAuth');
 				}
 			};
-			xhttp.open("POST", "/api/v1/site/auth/sendEmailVerificationCode", true);
+			xhttp.open("POST", "/api/v1/admin/auth/sendEmailVerificationCode", true);
 			xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+			xhttp.setRequestHeader('x-access-token', token);
 			xhttp.send(body);
 		}
 	}

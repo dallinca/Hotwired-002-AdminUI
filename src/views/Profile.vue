@@ -74,7 +74,7 @@ export default {
 					console.log(responseObj);
 				}
 			};
-			xhttp.open("GET", "/api/v1/site/auth/me", true);
+			xhttp.open("GET", "/api/v1/admin/auth/me", true);
 			xhttp.setRequestHeader('x-access-token', token);
 			xhttp.send();
 		},

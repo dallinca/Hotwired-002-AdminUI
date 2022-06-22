@@ -339,6 +339,13 @@ button:hover, [type="button"]:hover, [type="reset"]:hover, [type="submit"]:hover
     width: 100%;
     display: grid;
 }
+.form__field--message {
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    /*border: 1px solid var(--brand-color-glyph);*/
+    padding: 0 10px;
+}
 .form__field--checkbox {
     display: flex;
     align-items: center;

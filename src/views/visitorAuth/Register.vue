@@ -7,7 +7,8 @@
         <input type="text" v-model="email" placeholder="example@email.com">
     </div>
 	<div class="form__field--two">
-		<input class="form__actions__submit" type="button" value="Send Code" v-on:click="sendEmailVerificationCode">
+		<!--<input class="form__actions__submit" type="button" value="Send Code" v-on:click="sendEmailVerificationCode">-->
+		<span class="form__field--message">Contact your administrator to send your code</span>
 		<input class="form__actions__submit" type="button" value="I have my Code" v-if="!showFullForm" v-on:click="hasCode">
 		<input class="" type="text" v-model="emailVerificationCode" placeholder="000000" v-if="showFullForm">
 	</div>
@@ -93,7 +94,7 @@ export default {
 
 				}
 			};
-			xhttp.open("POST", "/api/v1/site/auth/register", true);
+			xhttp.open("POST", "/api/v1/admin/auth/register", true);
 			xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 			xhttp.send(body);
 		},
@@ -131,7 +132,7 @@ export default {
 					// vueContext.$emit('closeAuth');
 				}
 			};
-			xhttp.open("POST", "/api/v1/site/auth/sendEmailVerificationCode", true);
+			xhttp.open("POST", "/api/v1/admin/auth/sendEmailVerificationCode", true);
 			xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 			xhttp.send(body);
 		}

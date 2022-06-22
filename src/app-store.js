@@ -54,7 +54,7 @@ const store = createStore({
                     if (this.status == 200 && true == responseObj.auth) dispatch({ 'type': UPDATE_AUTH_TOKEN, 'newToken': authToken })
 				}
 			};
-			xhttp.open("GET", "/api/v1/site/auth/checkToken", true);
+			xhttp.open("GET", "/api/v1/admin/auth/checkToken", true);
 			xhttp.setRequestHeader('x-access-token', authToken);
 			xhttp.send();
         }
