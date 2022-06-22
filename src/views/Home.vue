@@ -1,73 +1,40 @@
 <template>
 <section>
   <div class="home component-padding">
-    <h1>Welcome Home!</h1>
-
-    <da-chat
-      v-bind:parent-auth="auth">
-    </da-chat>
-
-    <h2>Current Features -{{ auth }}</h2>
-    <ul>
-      <li>Register</li>
-      <li>Login/Logout</li>
-      <li>General Chat</li>
-    </ul>
-
-    <h2>Coming Soon</h2>
-    <ul>
-      <li>User Settings Page</li>
-      <li>Friends</li>
-      <li>Flashcards</li>
-    </ul>
-    <a href="#">Link text#</a><br/>
-    <a>Link text without href</a><br/>
-    <input type="button" value="Button"><br/>
-    <input type="checkbox"><br/>
-    <input type="color"><br/>
-    <input type="date"><br/>
-    <input type="datetime-local"><br/>
-    <input type="email"><br/>
-    <input type="file"><br/>
-    <input type="hidden"><br/>
-    <input type="image"><br/>
-    <input type="month"><br/>
-    <input type="number"><br/>
-    <input type="password"><br/>
-    <input type="radio"><br/>
-    <input type="range"><br/>
-    <input type="reset"><br/>
-    <input type="search"><br/>
-    <input type="submit"><br/>
-    <input type="tel"><br/>
-    <input type="text"><br/>
-    <input type="time"><br/>
-    <input type="url"><br/>
-    <input type="week">
+    <div class="home__areYouReady">
+      <div class="home__areYouReady__line1"><span class="header-font">Are you ready</span></div>
+      <div class="home__areYouReady__line2"><span>for a</span></div>
+      <div class="home__areYouReady__line3"><span class="header-font"><span class="home__areYouReady__newEra header-font">new era</span> of gaming?</span></div>
+    </div>
   </div>
 </section>
 </template>
 
 <script>
-import DaChat from '@/components/da-chat.vue'
-
-export default {
-    name: 'page-home',
-    components: {
-        DaChat
-    },
-	props: {
-		parentAuth: Object
-	},
-	data: function() {
-		return {
-			// current Auth
-			auth: this.parentAuth
-		}
-	},
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.home__areYouReady {
+  display: grid;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 9rem 0;
+}
+.home__areYouReady__line1 {
+  font-size: 4.8rem;
+  text-transform: uppercase;
+}
+.home__areYouReady__line2 {
+  font-size: 2.4rem;
+  margin: 4.8rem 0rem;
+}
+.home__areYouReady__line3 {
+  font-size: 4.8rem;
+  text-transform: uppercase;
+}
+.home__areYouReady__newEra {
+  color: var(--brand-color-main);
+}
 </style>
