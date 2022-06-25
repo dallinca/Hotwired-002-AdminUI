@@ -1,13 +1,12 @@
 <template>
 <section>
-	<div class="profile component-padding">
+	<div class="userList component-padding">
 		<div v-if="!hasToken">
 			<h1>Please Login</h1>
 		</div>
 		<div v-if="hasToken">
-			<h1>Welcome {{ userName }}!</h1>
+			<h1>User Listings</h1>
 
-			<span>Email:</span><span>{{ userEmail }}</span>
 		</div>
 	</div>
 </section>
@@ -15,7 +14,7 @@
 
 <script>
 export default {
-	name: 'da-profile',
+	name: 'userList',
 	data: function() {
 		return {
 			// data
@@ -65,8 +64,8 @@ export default {
 					}
 
 					if (this.status == 200 && true == responseObj.auth) {
-						vueContext.userName = responseObj.data.user.name;
-						vueContext.userEmail = responseObj.data.user.email;
+						vueContext.userName = responseObj.user.name;
+						vueContext.userEmail = responseObj.user.email;
 					} else {
 						alert("Error: " + this.responseText);
 					}
@@ -74,7 +73,7 @@ export default {
 					console.log(responseObj);
 				}
 			};
-			xhttp.open("GET", "/api/v1/admin/user/me", true);
+			xhttp.open("GET", "/api/v1/admin/auth/me", true);
 			xhttp.setRequestHeader('x-access-token', token);
 			xhttp.send();
 		},

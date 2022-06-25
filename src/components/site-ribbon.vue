@@ -105,6 +105,8 @@ export default {
                 this.userNavItems["logout"] = { text: "Logout", link: "#"};
                 this.userNavItems["profile"] = { text: "Profile", link: "/Profile"};
                 this.userNavItems["resetPassword"] = { text: "Reset Password", link: "/ResetPassword"};
+
+                this.siteNavItems["userList"] = { text: "Users", link: "/UserList" };
             } else  {
                 this.userLoggedIn = false;
 
@@ -112,6 +114,8 @@ export default {
                 delete this.userNavItems["logout"];
                 delete this.userNavItems["profile"];
                 delete this.userNavItems["resetPassword"];
+
+                delete this.siteNavItems["userList"];
 
                 // Add items
                 this.userNavItems["login"] = { text: "Login", link: "/Login"};

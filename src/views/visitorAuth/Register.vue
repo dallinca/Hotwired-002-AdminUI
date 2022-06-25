@@ -94,7 +94,7 @@ export default {
 
 				}
 			};
-			xhttp.open("POST", "/api/v1/admin/auth/register", true);
+			xhttp.open("POST", "/api/v1/admin/user/auth/register", true);
 			xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 			xhttp.send(body);
 		},
@@ -132,7 +132,7 @@ export default {
 					// vueContext.$emit('closeAuth');
 				}
 			};
-			xhttp.open("POST", "/api/v1/admin/auth/sendEmailVerificationCode", true);
+			xhttp.open("POST", "/api/v1/admin/user/email/sendEmailVerificationCode", true);
 			xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 			xhttp.send(body);
 		}

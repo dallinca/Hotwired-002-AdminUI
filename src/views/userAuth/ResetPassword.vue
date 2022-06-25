@@ -137,7 +137,7 @@ export default {
 					// vueContext.$emit('closeAuth');
 				}
 			};
-			xhttp.open("POST", "/api/v1/admin/auth/resetPassword", true);
+			xhttp.open("POST", "/api/v1/admin/user/auth/resetPassword", true);
 			xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 			xhttp.send(body);
 		},
@@ -175,7 +175,7 @@ export default {
 					// vueContext.$emit('closeAuth');
 				}
 			};
-			xhttp.open("POST", "/api/v1/admin/auth/sendEmailVerificationCode", true);
+			xhttp.open("POST", "/api/v1/admin/user/email/sendEmailVerificationCode", true);
 			xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 			xhttp.setRequestHeader('x-access-token', token);
 			xhttp.send(body);

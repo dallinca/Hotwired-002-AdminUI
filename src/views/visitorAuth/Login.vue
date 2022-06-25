@@ -82,7 +82,7 @@ export default {
 
 				}
 			};
-			xhttp.open("POST", "/api/v1/admin/auth/login", true);
+			xhttp.open("POST", "/api/v1/admin/user/auth/login", true);
 			xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 			xhttp.send(body);
 		},
