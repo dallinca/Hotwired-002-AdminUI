@@ -1,16 +1,16 @@
 <template>
 <div class="chat">
-    <div class="chat__messages-wrap" v-on:scroll="scrolled" ref="scroller">
-        <div class="chat__messages">
-            <div class="chat__message" v-for="message in messages" v-bind:key="message"><span class="chat__message__name">{{ message.name }}</span>: <span class="chat__message__message">{{ message.body }}</span></div>
-        </div>
-    </div>
-    <div class="chat__compose">
-        <textarea class="chat__compose-text" maxlength="1000" v-model="newMessage" :disabled="!enableNewMessage"></textarea>
-        <div class="chat__compose__send" v-on:click="sendNewMessage">
-            <span>SEND</span>
-        </div>
-    </div>
+	<div class="chat__messages-wrap" v-on:scroll="scrolled" ref="scroller">
+		<div class="chat__messages">
+			<div class="chat__message" v-for="message in messages" v-bind:key="message"><span class="chat__message__name">{{ message.name }}</span>: <span class="chat__message__message">{{ message.body }}</span></div>
+		</div>
+	</div>
+	<div class="chat__compose">
+		<textarea class="chat__compose-text" maxlength="1000" v-model="newMessage" :disabled="!enableNewMessage"></textarea>
+		<div class="chat__compose__send" v-on:click="sendNewMessage">
+			<span>SEND</span>
+		</div>
+	</div>
 </div>
 </template>
 
@@ -143,42 +143,42 @@ export default {
 ===============================
 **/
 .chat {
-    border: 1px solid;
-    height: 300px;
-    display: grid;
-    grid-template-rows: calc(100% - 50px) 50px;
+	border: 1px solid;
+	height: 300px;
+	display: grid;
+	grid-template-rows: calc(100% - 50px) 50px;
 }
 .chat__messages-wrap {
-    border: 1px solid;
-    overflow: auto;
+	border: 1px solid;
+	overflow: auto;
 }
 .chat__messages {}
 .chat__message {}
 .chat__message__name {
-    font-weight: 900;
+	font-weight: 900;
 }
 .chat__message__message {}
 .chat__compose {
-    display: grid;
-    grid-template-columns: calc(100% - 50px) 50px;
+	display: grid;
+	grid-template-columns: calc(100% - 50px) 50px;
 }
 .chat__compose__send {
-    display: grid;
-    cursor: pointer;
-    border: 1px solid;
-    transition: all .5s ease;
+	display: grid;
+	cursor: pointer;
+	border: 1px solid;
+	transition: all .5s ease;
 }
 .chat__compose__send:hover {
-    background: #CCC;
+	background: #CCC;
 }
 .chat__compose-text {
-    width: 100%;
-    height: 100%;
-    resize: none;
-    box-sizing: border-box;
-    border: 1px solid;
+	width: 100%;
+	height: 100%;
+	resize: none;
+	box-sizing: border-box;
+	border: 1px solid;
 }
 .chat__compose-text:hover {
-    border: 1px solid;
+	border: 1px solid;
 }
 </style>

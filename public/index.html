@@ -49,6 +49,11 @@
             setTimeout(() => document.getElementById("page-loader").classList.remove("loading"), msFadeDuration + msDelay);
         });
       })();
+
+      function __HW__() {}
+      __HW__.utils = {}
+      __HW__.utils.formatUrlParams = function(params) {return "?" + __HW__.utils.formatBodyParams(params)}
+      __HW__.utils.formatBodyParams = function(params) {return Object.keys(params).map(function(key){return key+"="+encodeURIComponent(params[key])}).join("&")}
       </script>
   </body>
 </html>

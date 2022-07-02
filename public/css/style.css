@@ -241,16 +241,23 @@ button, [type="button"], [type="reset"], [type="submit"] {
     /* hovering */
     transition: background .5s, transform .5s, border-radius .5s, border .5s, padding .5s, width .5s, height .5s, color .5s;
 
-    background: var(--brand-color-accent-light);
+    /*background: var(--brand-color-accent-light);*/
+    background: var(--brand-color-main);
+    color: var(--brand-color-canvas);
     border: 1px solid var(--brand-color-glyph);
-    color: var(--brand-color-glyph)
 }
 button:hover, [type="button"]:hover, [type="reset"]:hover, [type="submit"]:hover, button:focus, [type="button"]:focus, [type="reset"]:focus, [type="submit"]:focus {
     cursor: pointer;
 
-    background: var(--brand-color-accent);
+    /*background: var(--brand-color-accent);*/
+    background: var(--brand-color-main-light);
+    color: var(--brand-color-glyph)
     border: 1px solid var(--brand-color-accent);
-    color: var(--brand-color-canvas);
+}
+button[disabled], button:disabled, button:hover[disabled], button:hover:disabled {
+    background: var(--brand-color-accent-light);
+    color: var(--brand-color-glyph);
+    cursor: default;
 }
 /* button-1 */
 .button--1 {
@@ -275,6 +282,15 @@ button:hover, [type="button"]:hover, [type="reset"]:hover, [type="submit"]:hover
     background: var(--icon-color-canvas-hover);
     border: 1px solid var(--icon-color-border-hover);
     color: var(--icon-color-glyph-hover);
+}
+
+/**
+===============================
+===== INPUT BUTTON - TABS
+===============================
+**/
+.tabs {
+    display: flex;
 }
 
 /**
@@ -339,6 +355,15 @@ button:hover, [type="button"]:hover, [type="reset"]:hover, [type="submit"]:hover
     width: 100%;
     display: grid;
 }
+.form__field--left {
+    justify-content: left;
+}
+.form__field--center {
+    justify-content: center;
+}
+.form__field--right {
+    justify-content: right;
+}
 .form__field--message {
     display: grid;
     align-content: center;
@@ -397,6 +422,88 @@ button:hover, [type="button"]:hover, [type="reset"]:hover, [type="submit"]:hover
 .form__messages__warn {
     background: #f2e49c;
     border: 1px solid #e0bc0977;
+}
+
+/**
+===============================
+===== TOOLTIPS
+===============================
+**/
+.hasTooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+.hasTooltip .tooltip {
+    visibility: hidden;
+    background-color: var(--brand-color-canvas);
+    color: var(--brand-color-glyph);
+    box-shadow: 0px 0px 8px var(--brand-color-glyph);
+    text-align: center;
+    padding: .5rem;
+    border-radius: 6px;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+.hasTooltip:hover .tooltip {
+    visibility: visible;
+}
+
+
+/**
+===============================
+===== PAGINATION
+===============================
+**/
+.pagination {}
+
+
+
+/**
+===============================
+===== TABLE
+===============================
+**/
+table {
+    width: 100%;
+}
+table, th, td {
+    border: 1px solid var(--brand-color-glyph);
+    background-color: var(--brand-color-canvas);
+    box-shadow: 0 0 2px var(--brand-color-glyph);
+}
+th, td {
+    padding: .6rem;
+}
+tr:nth-child(even) td {
+    background-color: var(--brand-color-contrast);
+}
+tr:nth-child(odd) td {
+    background-color: var(--brand-color-secondary-lighter);
+}
+tr:first-child th {
+    background-color: var(--brand-color-secondary);
+    color: var(--brand-color-contrast);
+    resize: horizontal;
+    overflow: hidden;
+}
+
+table.table--simple {
+    border-collapse: collapse;
+    border: none;
+    background-color: var(--brand-color-canvas);
+    box-shadow: none;
+}
+table.table--simple th, table.table--simple td {
+    border: none;
+    box-shadow: none;
+}
+table.table--simple td {
+    border-top: 1px solid var(--brand-color-glyph);
+    background-color: var(--brand-color-canvas);
 }
 
 

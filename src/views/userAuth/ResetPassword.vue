@@ -1,57 +1,57 @@
 <template>
 <section class="component-padding">
 <div class="form">
-    <h1 class="form__title">Reset Password</h1>
-    <div class="form__field">
-        <label>Email</label>
-        <input type="text" v-model="email" placeholder="example@email.com">
-    </div>
-	<div class="form__field--two">
+  <h1 class="form__title">Reset Password</h1>
+  <div class="form__field">
+    <label>Email</label>
+    <input type="text" v-model="email" placeholder="example@email.com">
+  </div>
+	<div class="form__field--two form__field--left">
 		<input class="form__actions__submit" type="button" value="Send Code" v-on:click="sendEmailVerificationCode">
 		<input class="form__actions__submit" type="button" value="I have my Code" v-if="!showFullForm" v-on:click="hasCode">
 		<input class="" type="text" v-model="emailVerificationCode" placeholder="000000" v-if="showFullForm">
 	</div>
     <div class="form__field" v-if="showFullForm">
-        <label>New Password</label>
-        <input v-bind:type="passwordFieldType" v-model="password" placeholder="super secret password" >
+      <label>New Password</label>
+      <input v-bind:type="passwordFieldType" v-model="password" placeholder="super secret password" >
     </div>
     <div class="form__field form__field--checkbox" v-if="showFullForm">
-        <input type="checkbox" v-model="showPassword">
-        <label for="checkbox">Show Password</label>
+      <input type="checkbox" v-model="showPassword">
+      <label for="checkbox">Show Password</label>
     </div>
-    <div class="form__field--two" v-if="showFullForm">
-        <input class="form__actions__submit" type="button" value="Reset Password" v-on:click="submit">
-        <input class="form__actions__cancel" type="button" value="Cancel" v-on:click="cancel">
+    <div class="form__field--two form__field--center" v-if="showFullForm">
+      <input class="form__actions__submit" type="button" value="Reset Password" v-on:click="submit">
+      <input class="form__actions__cancel" type="button" value="Cancel" v-on:click="cancel">
     </div>
     <div class="form__messages" v-if="messages.length">
-        <div v-for="message in messages" v-bind:key="message"
-            class="form__messages__message"
-            v-bind:class="{
-                form__messages__error: message.type == 'error',
-                form__messages__success: message.type == 'success',
-                form__messages__warn: message.type == 'warn' }"
-        >
-            <span>{{ message.message }}</span>
-        </div>
+      <div v-for="message in messages" v-bind:key="message"
+      class="form__messages__message"
+      v-bind:class="{
+        form__messages__error: message.type == 'error',
+        form__messages__success: message.type == 'success',
+        form__messages__warn: message.type == 'warn' }"
+      >
+        <span>{{ message.message }}</span>
+      </div>
     </div>
 </div>
 </section>
 </template>
 
 <script>
-//import { UPDATE_AUTH_TOKEN, CLEAR_AUTH_TOKEN } from '@/action-types'
+import { ALERT_SUCCESS, ALERT_WARN, ALERT_ERROR } from '@/action-types'
 
 export default {
-    name: 'resetPassword',
-    data: function() {
-        return {
+  name: 'resetPassword',
+  data: function() {
+    return {
 			email: '',
 			emailVerificationCode: '',
 			showFullForm: false,
 			password: '',
 			showPassword: false,
 			messages: []
-        }
+    }
 	},
 	computed: {
 		passwordFieldType: function() {
@@ -61,80 +61,49 @@ export default {
 				return 'password';
 			}
 		},
-		hasToken() {
-			return this.$store.state.auth.hasToken;
-		}
+    token() {
+      return this.$store.getters.authToken;
+    }
 	},
-	watch: {
-		hasToken: function() {
-			this.updateUserInfo();
-		}
-	},
+	watch: {},
 	created: function() {
-		this.updateUserInfo();
+    this.redirectToLogin()
 	},
 	methods: {
-		updateUserInfo: function() {
-			// Check if a token exists
-			var token = this.$store.getters.authToken;
-			if (!token) {
-				this.userName = '';
-				this.userEmail = '';
-				this.redirectToLogin();
-				return;
-			}
-
-			// If token exists attempt to get user information
-			/*var vueContext = this;
-			var xhttp = new XMLHttpRequest();
-			xhttp.onreadystatechange = function() {
-				if (this.readyState == 4) {
-					var responseObj = JSON.parse(this.responseText);
-
-					if (false == responseObj.auth) {
-						alert("Not authorized to view this page");
-					}
-
-					if (this.status == 200 && true == responseObj.auth) {
-						vueContext.userName = responseObj.user.name;
-						vueContext.userEmail = responseObj.user.email;
-					} else {
-						alert("Error: " + this.responseText);
-					}
-
-					console.log(responseObj);
-				}
-			};
-			xhttp.open("GET", "/api/v1/site/auth/me", true);
-			xhttp.setRequestHeader('x-access-token', token);
-			xhttp.send();*/
-		},
 		redirectToLogin: function() {
+      if (this.token) return
 			this.$router.push({ path: 'ForgotPassword'})
 		},
 		submit: function() {
-			this.messages = [];
-			var body = 'email=' + this.email + '&emailVerificationCode=' + this.emailVerificationCode + '&password=' + this.password;
+			var body = window.__HW__.utils.formatBodyParams({
+        'email': this.email,
+        'emailVerificationCode': this.emailVerificationCode,
+        'password': this.password
+      });
 
 			var vueContext = this;
 			var xhttp = new XMLHttpRequest();
 			xhttp.onreadystatechange = function() {
-				if (this.readyState == 4) {
-                    if (this.status == 404) {
-						return vueContext.messages.push({ type: 'error', message: this.statusText });
-                    }
+        if (this.readyState == 0) { // request not initialized
+        } else if (this.readyState == 1) { // server connection established
+        } else if (this.readyState == 2) { // request received
+        } else if (this.readyState == 3) { // processing request
+        } else if (this.readyState == 4) { //request finished and response is ready
 					var responseObj = JSON.parse(this.responseText);
+          if (!this.responseText || !responseObj) {
+						vueContext.$store.dispatch(ALERT_ERROR, { message: 'Error - Please contact your system administrator' })
+            return
+          }
+
+          if (this.status != 200) {
+						vueContext.$store.dispatch(ALERT_WARN, { message: responseObj.message })
+            return
+          }
 
 					if (this.status == 200) {
-						//vueContext.$store.dispatch({ 'type': UPDATE_AUTH_TOKEN, 'newToken': responseObj.token});
-						vueContext.messages.push({ type: 'success', message: responseObj.message });
+						vueContext.$store.dispatch(ALERT_SUCCESS, { message: responseObj.message })
 						vueContext.cleanup();
-					} else {
-						//vueContext.$store.dispatch(CLEAR_AUTH_TOKEN);
-						vueContext.messages.push({ type: 'error', message: responseObj.message });
 					}
-
-					// vueContext.$emit('closeAuth');
 				}
 			};
 			xhttp.open("POST", "/api/v1/admin/user/auth/resetPassword", true);
@@ -154,31 +123,35 @@ export default {
 			this.password = '';
 		},
 		sendEmailVerificationCode: function() {
-			var token = this.$store.getters.authToken;
-			var body = 'email=' + this.email;
-
 			var vueContext = this;
 			var xhttp = new XMLHttpRequest();
 			xhttp.onreadystatechange = function() {
-				if (this.readyState == 4) {
-                    if (this.status == 404) {
-						return vueContext.messages.push({ type: 'error', message: this.statusText });
-                    }
+        if (this.readyState == 0) { // request not initialized
+        } else if (this.readyState == 1) { // server connection established
+        } else if (this.readyState == 2) { // request received
+        } else if (this.readyState == 3) { // processing request
+        } else if (this.readyState == 4) { //request finished and response is ready
 					var responseObj = JSON.parse(this.responseText);
+          if (!this.responseText || !responseObj) {
+						vueContext.$store.dispatch(ALERT_ERROR, { message: 'Error - Please contact your system administrator' })
+            return
+          }
+
+          if (this.status != 200) {
+						vueContext.$store.dispatch(ALERT_WARN, { message: responseObj.message })
+            return
+          }
 
 					if (this.status == 200) {
-						vueContext.messages.push({ type: 'success', message: responseObj.message });
-					} else {
-						vueContext.messages.push({ type: 'error', message: responseObj.message });
+						vueContext.$store.dispatch(ALERT_SUCCESS, { message: responseObj.message })
 					}
 
-					// vueContext.$emit('closeAuth');
 				}
 			};
-			xhttp.open("POST", "/api/v1/admin/user/email/sendEmailVerificationCode", true);
+			xhttp.open("POST", "/api/v1/admin/user/email/sendOwnEmailVerificationCode", true);
 			xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-			xhttp.setRequestHeader('x-access-token', token);
-			xhttp.send(body);
+			xhttp.setRequestHeader('x-access-token', this.token);
+			xhttp.send();
 		}
 	}
 }

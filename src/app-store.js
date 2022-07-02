@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import { UPDATE_AUTH_TOKEN, VALIDATE_AUTH_TOKEN, CLEAR_AUTH_TOKEN } from './action-types'
+import { ALERT, ALERT_SUCCESS, ALERT_WARN, ALERT_ERROR, UPDATE_AUTH_TOKEN, VALIDATE_AUTH_TOKEN, CLEAR_AUTH_TOKEN } from './action-types'
 
 
 const store = createStore({
@@ -7,7 +7,9 @@ const store = createStore({
       return {
         auth: {
             hasToken: false
-        }
+        },
+        alert: {},
+        alertID: 1
       }
     },
     mutations: {
@@ -18,26 +20,26 @@ const store = createStore({
         }
     },
     actions: {
+        [ALERT] ({ state }, payload) {
+            payload.id = state.alertID++;
+            state.alert = payload;
+        },
+        [ALERT_SUCCESS] ({ dispatch }, payload) { dispatch(ALERT, {'type':ALERT_SUCCESS, 'message':payload.message}) },
+        [ALERT_WARN] ({ dispatch }, payload) { dispatch(ALERT, {'type':ALERT_WARN, 'message':payload.message}) },
+        [ALERT_ERROR] ({ dispatch }, payload) { dispatch(ALERT, {'type':ALERT_ERROR, 'message':payload.message}) },
         [CLEAR_AUTH_TOKEN] ({ state }) {
-            console.log(CLEAR_AUTH_TOKEN);
-
             state.auth.hasToken = false;
             document.cookie = "jwt=";
         },
         [UPDATE_AUTH_TOKEN] ({ state, dispatch }, payload /* newToken: string */ ) {
-            console.log(UPDATE_AUTH_TOKEN);
-
             if (payload.newToken) {
                 state.auth.hasToken = true;
                 document.cookie = "jwt=" + payload.newToken;
             } else {
                 dispatch(CLEAR_AUTH_TOKEN);
             }
-            
         },
         [VALIDATE_AUTH_TOKEN] ({ getters, dispatch }) {
-            console.log(VALIDATE_AUTH_TOKEN);
-
 			// Check if a token exists
 			var authToken = getters.authToken;
 			if (!authToken) {
