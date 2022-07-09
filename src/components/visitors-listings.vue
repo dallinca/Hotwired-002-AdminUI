@@ -32,8 +32,8 @@ export default {
         baseUrl: '/api/v1/admin/visitor/all',
         fieldKeys: ['email', 'codeExpirationTime', 'approvedForAccount'], 
 
-				limit: 2,
-				radius: 2
+				limit: 10,
+				radius: 3
       },
       emails: {},
       emailsApproved: {}

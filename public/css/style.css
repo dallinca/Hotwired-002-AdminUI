@@ -244,20 +244,32 @@ button, [type="button"], [type="reset"], [type="submit"] {
     /*background: var(--brand-color-accent-light);*/
     background: var(--brand-color-main);
     color: var(--brand-color-canvas);
+    fill: var(--brand-color-canvas);
     border: 1px solid var(--brand-color-glyph);
+}
+button svg, [type="button"] svg, [type="reset"] svg, [type="submit"] svg {
+    fill: var(--brand-color-canvas);
 }
 button:hover, [type="button"]:hover, [type="reset"]:hover, [type="submit"]:hover, button:focus, [type="button"]:focus, [type="reset"]:focus, [type="submit"]:focus {
     cursor: pointer;
 
     /*background: var(--brand-color-accent);*/
     background: var(--brand-color-main-light);
-    color: var(--brand-color-glyph)
+    color: var(--brand-color-glyph);
+    fill: var(--brand-color-glyph);
     border: 1px solid var(--brand-color-accent);
+}
+button:hover svg, [type="button"]:hover svg, [type="reset"]:hover svg, [type="submit"]:hover svg, button:focus svg, [type="button"]:focus svg, [type="reset"]:focus svg, [type="submit"]:focus svg {
+    fill: var(--brand-color-glyph);
 }
 button[disabled], button:disabled, button:hover[disabled], button:hover:disabled {
     background: var(--brand-color-accent-light);
     color: var(--brand-color-glyph);
+    fill: var(--brand-color-glyph);
     cursor: default;
+}
+button[disabled] svg, button:disabled svg, button:hover[disabled] svg, button:hover:disabled svg {
+    fill: var(--brand-color-glyph);
 }
 /* button-1 */
 .button--1 {
@@ -489,6 +501,11 @@ tr:first-child th {
     color: var(--brand-color-contrast);
     resize: horizontal;
     overflow: hidden;
+}
+td > div {
+    display: grid;
+    align-items: center;
+    position: relative;
 }
 
 table.table--simple {
