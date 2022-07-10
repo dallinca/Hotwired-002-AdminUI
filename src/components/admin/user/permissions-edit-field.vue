@@ -22,7 +22,7 @@
 
 <script>
 import EditField from '@/components/edit-field.vue'
-import { ALERT_WARN, ALERT_ERROR } from '@/action-types'
+import { ALERT_SUCCESS, ALERT_WARN, ALERT_ERROR } from '@/action-types'
 
 export default {
 	name: 'permissionsEditField',
@@ -59,7 +59,6 @@ export default {
       this.oldSelections = [...this.permissions]
     },
     submitPermissionsUpdate: function() {
-      console.log("Trying to submit permission changes!")
       var body = {
         email: this.email,
         permissions: this.currentSelections
@@ -85,6 +84,7 @@ export default {
           }
 					
 					if (this.status == 200) {
+						vueContext.$store.dispatch(ALERT_SUCCESS, { message: responseObj.message })
 						vueContext.oldSelections = [...vueContext.currentSelections];
 					}
 				}
