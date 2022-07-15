@@ -106,6 +106,7 @@ export default {
         this.userNavItems["resetPassword"] = { text: "Reset Password", link: "/ResetPassword"};
 
         this.siteNavItems["adminUsers"] = { text: "Admin Users", link: "/AdminUsers" };
+        this.siteNavItems["siteUsers"] = { text: "Site Users", link: "/SiteUsers" };
       } else  {
         this.userLoggedIn = false;
 
@@ -115,6 +116,7 @@ export default {
         delete this.userNavItems["resetPassword"];
 
         delete this.siteNavItems["adminUsers"];
+        delete this.siteNavItems["siteUsers"];
 
         // Add items
         this.userNavItems["login"] = { text: "Login", link: "/Login"};
