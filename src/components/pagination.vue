@@ -7,7 +7,7 @@
         <th v-for="fieldKey in pageItems.fieldKeys" :key="fieldKey">{{ fieldKey }}</th>
       </tr>
       <tr v-for="listing in pageItems.listings" :key="listing[keyField]">
-        <td v-for="fieldKey in pageItems.fieldKeys" :key="fieldKey"><slot v-bind:name=fieldKey v-bind="listing">{{ listing[fieldKey] }}</slot></td>
+        <td v-for="fieldKey in pageItems.fieldKeys" :key="fieldKey"><slot v-bind:name=fieldKey v-bind="listing" v-bind:__fieldKey="fieldKey">{{ listing[fieldKey] }}</slot></td>
       </tr>
     </table>
 	</div>
@@ -30,6 +30,7 @@ export default {
       limit: { type: Number, default: 5 },
       radius: { type: Number, default: 3 }
   },
+	expose: ['fieldUpdated'],
 	components: {
 		PaginationControls
 	},
@@ -106,7 +107,11 @@ export default {
     updateFieldKeys: function() {
       if (this.pageItems.fieldKeys.length) return
       this.pageItems.fieldKeys = Object.keys(this.pageItems.listings[0])
-    }
+    },
+		fieldUpdated: function({ idObject, newValue }) {
+			var recordToUpdate = this.pageItems.listings.find(listing => listing[this.keyField] == idObject[this.keyField])
+			recordToUpdate[idObject.__fieldKey] = newValue
+		}
 	}
 }
 </script>

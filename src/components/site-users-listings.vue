@@ -1,15 +1,30 @@
 <template>
-  <Pagination v-bind="paginationSiteUsers">
+  <Pagination v-bind="paginationSiteUsers" ref="pagination">
+    <template #isGameDev="isGameDevProps">
+      <EditFieldBoolean
+        :baseUrl="'/api/v1/admin/siteUser/isGameDev'"
+        :booleanValue="isGameDevProps.isGameDev"
+        :idObject="isGameDevProps"
+        @updatedValue="$refs.pagination.fieldUpdated($event)"
+      >
+      <template #trueText>GameDev</template>
+      <template #falseText>-</template>
+      <template #setTrueText>Promote</template>
+      <template #setFalseText>Demote</template>
+      </EditFieldBoolean>
+    </template>
   </Pagination>
 </template>
 
 <script>
 import Pagination from '@/components/pagination.vue'
+import EditFieldBoolean from '@/components/edit-field-boolean.vue'
 
 export default {
 	name: 'siteUsersListings',
 	components: {
-		Pagination
+		Pagination,
+    EditFieldBoolean
 	},
 	data: function() {
 		return {
