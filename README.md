@@ -1,4 +1,6 @@
-# HotwiredAdmin
+# Hotwired AdminUI
+
+Built to connect to Hotwired SiteAPI
 
 ## Project setup
 ```
