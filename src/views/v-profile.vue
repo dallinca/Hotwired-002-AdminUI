@@ -50,7 +50,6 @@ export default {
 	methods: {
 		updateUserInfo: function() {
       this.handleAccess();
-      this.$store.state.auth.hasToken;
 
 			// If token exists attempt to get user information
 			var vueContext = this;

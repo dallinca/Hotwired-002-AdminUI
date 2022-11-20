@@ -15,8 +15,8 @@ const store = createStore({
     mutations: {
     },
     getters: {
-        authToken () {
-			return document.cookie.replace(/(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/, "$1");
+        authToken (state) {
+            return state.auth.hasToken ? document.cookie.replace(/(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/, "$1") : ""
         }
     },
     actions: {
