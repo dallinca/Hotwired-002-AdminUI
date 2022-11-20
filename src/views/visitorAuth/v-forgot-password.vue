@@ -42,7 +42,7 @@
 import { ALERT_SUCCESS, ALERT_WARN, ALERT_ERROR, UPDATE_AUTH_TOKEN, CLEAR_AUTH_TOKEN } from '@/action-types'
 
 export default {
-  name: 'forgotPassword',
+  name: 'v-forgot-password',
   data: function() {
     return {
 			email: '',

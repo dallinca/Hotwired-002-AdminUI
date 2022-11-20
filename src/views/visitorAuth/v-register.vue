@@ -46,7 +46,7 @@
 import { ALERT_SUCCESS, ALERT_WARN, ALERT_ERROR, UPDATE_AUTH_TOKEN } from '@/action-types'
 
 export default {
-  name: 'register',
+  name: 'v-register',
   data: function() {
     return {
 			email: '',

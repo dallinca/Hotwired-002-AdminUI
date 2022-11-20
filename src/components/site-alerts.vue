@@ -18,7 +18,7 @@
 import { ALERT_SUCCESS, ALERT_WARN, ALERT_ERROR } from '@/action-types'
 
 export default {
-	name: 'alerts',
+	name: 'site-alerts',
 	data: function() {
 		return {
       ALERT_SUCCESS,

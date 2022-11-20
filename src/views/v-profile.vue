@@ -17,7 +17,7 @@
 import { ALERT_WARN, ALERT_ERROR } from '@/action-types'
 
 export default {
-	name: 'da-profile',
+	name: 'v-profile',
 	data: function() {
 		return {
 			// data
@@ -50,6 +50,7 @@ export default {
 	methods: {
 		updateUserInfo: function() {
       this.handleAccess();
+      this.$store.state.auth.hasToken;
 
 			// If token exists attempt to get user information
 			var vueContext = this;

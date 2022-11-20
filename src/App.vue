@@ -1,14 +1,14 @@
 <template>
   <div class="site__wrap">
     <site-ribbon />
-    <alerts />
+    <site-alerts />
     <div class="page__wrap"><router-view /></div>
   </div>
 </template>
 
 <script>
 import SiteRibbon from '@/components/site-ribbon.vue'
-import Alerts from '@/components/alerts.vue'
+import SiteAlerts from '@/components/site-alerts.vue'
 
 import { VALIDATE_AUTH_TOKEN } from '@/action-types'
 
@@ -16,7 +16,7 @@ export default {
   name: 'App',
   components: {
     SiteRibbon,
-    Alerts
+    SiteAlerts
   },
   data: function() {
     return {}

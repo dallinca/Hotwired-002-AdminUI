@@ -20,7 +20,7 @@ import PaginationControls from '@/components/pagination-controls.vue'
 import { ALERT_WARN, ALERT_ERROR } from '@/action-types'
 
 export default {
-	name: 'pagination',
+	name: 'paginationLayout',
   props: {
       title: { type: String, default: "Paginated Items" },
       keyField: { type: String, required: true },

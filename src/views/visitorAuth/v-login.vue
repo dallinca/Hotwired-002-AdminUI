@@ -38,7 +38,7 @@
 import { ALERT_SUCCESS, ALERT_WARN, ALERT_ERROR, UPDATE_AUTH_TOKEN, CLEAR_AUTH_TOKEN } from '@/action-types'
 
 export default {
-  name: 'login',
+  name: 'v-login',
   data: function() {
     return {
 			email: '',

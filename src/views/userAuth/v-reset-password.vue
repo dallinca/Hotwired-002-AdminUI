@@ -42,7 +42,7 @@
 import { ALERT_SUCCESS, ALERT_WARN, ALERT_ERROR } from '@/action-types'
 
 export default {
-  name: 'resetPassword',
+  name: 'v-reset-password',
   data: function() {
     return {
 			email: '',

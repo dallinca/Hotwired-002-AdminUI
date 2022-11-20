@@ -1,5 +1,5 @@
 <template>
-  <pagination v-bind="paginationVisitors">
+  <pagination-layout v-bind="paginationVisitors">
     <template #codeExpirationTime="{ email, codeExpirationTime }">
       <div>
         <div v-if="Date.now() < codeExpirationTime || emails[email]">Code Still valid</div>
@@ -12,17 +12,17 @@
         <div v-if="!approvedForAccount && !emailsApproved[email]">Not Approved<button @click="approveForAccount(email, true)">Approve</button></div>
       </div>
     </template>
-  </pagination>
+  </pagination-layout>
 </template>
 
 <script>
-import Pagination from '@/components/pagination.vue'
+import PaginationLayout from '@/components/pagination-layout.vue'
 import { ALERT_SUCCESS, ALERT_WARN, ALERT_ERROR } from '@/action-types'
 
 export default {
 	name: 'visitorsListings',
 	components: {
-		Pagination
+		PaginationLayout
 	},
 	data: function() {
 		return {

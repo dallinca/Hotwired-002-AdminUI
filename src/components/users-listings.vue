@@ -1,20 +1,20 @@
 <template>
-  <Pagination v-bind="paginationUsers">
+  <Pagination-layout v-bind="paginationUsers">
     <template #permissions="permissionsProps">
 			<PermissionsEditField v-bind="permissionsProps" :allPermissions="permissionsAdditionalProps.allPermissions"></PermissionsEditField>
     </template>
-  </Pagination>
+  </Pagination-layout>
 </template>
 
 <script>
-import Pagination from '@/components/pagination.vue'
+import PaginationLayout from '@/components/pagination-layout.vue'
 import PermissionsEditField from '@/components/admin/user/permissions-edit-field.vue'
 import { ALERT_WARN, ALERT_ERROR } from '@/action-types'
 
 export default {
 	name: 'usersListings',
 	components: {
-		Pagination,
+		PaginationLayout,
 		PermissionsEditField
 	},
 	data: function() {

@@ -17,7 +17,7 @@ import VisitorsCreate from '@/components/visitors-create.vue'
 import VisitorsListings from '@/components/visitors-listings.vue'
 
 export default {
-	name: 'adminUsers',
+	name: 'v-admin-users',
 	components: {
     UsersListings,
     VisitorsCreate,

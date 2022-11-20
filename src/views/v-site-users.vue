@@ -8,7 +8,7 @@
 import SiteUsersListings from '@/components/site-users-listings.vue'
 
 export default {
-	name: 'siteUsers',
+	name: 'v-site-users',
 	components: {
     SiteUsersListings
 	},

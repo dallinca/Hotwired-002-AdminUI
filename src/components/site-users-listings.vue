@@ -1,5 +1,5 @@
 <template>
-  <Pagination v-bind="paginationSiteUsers" ref="pagination">
+  <Pagination-layout v-bind="paginationSiteUsers" ref="pagination">
     <template #isGameDev="isGameDevProps">
       <EditFieldBoolean
         :baseUrl="'/api/v1/admin/siteUser/isGameDev'"
@@ -13,17 +13,17 @@
       <template #setFalseText>Demote</template>
       </EditFieldBoolean>
     </template>
-  </Pagination>
+  </Pagination-layout>
 </template>
 
 <script>
-import Pagination from '@/components/pagination.vue'
+import PaginationLayout from '@/components/pagination-layout.vue'
 import EditFieldBoolean from '@/components/edit-field-boolean.vue'
 
 export default {
 	name: 'siteUsersListings',
 	components: {
-		Pagination,
+		PaginationLayout,
     EditFieldBoolean
 	},
 	data: function() {
