@@ -74,23 +74,48 @@ export default {
       siteNavTapped: false,
       userNavTapped: false,
       lastTapped: null,
-      onlyOneActiveTap: true
+      onlyOneActiveTap: true,
+
+      outsideTap: null
     }
   },
   computed: {
     hasToken() {
       return this.$store.state.auth.hasToken;
+    },
+    hasNavOpen() {
+      return (this.siteNavTapped || this.userNavTapped);
     }
   },
   watch: {
     hasToken: function(hasToken) {
       this.tokenStatusChange(hasToken);
+    },
+    hasNavOpen: function(hasNavOpen) {
+      if (hasNavOpen) {
+        document.addEventListener("click", this.documentClickListener);
+      } else {
+        document.removeEventListener("click", this.documentClickListener);
+      }
     }
   },
   created: function() {
     this.$store.dispatch(VALIDATE_AUTH_TOKEN);
   },
   methods: {
+    documentClickListener: function(event) {
+      var target = event.target;
+      
+      // Traverse to dropdown-menu or doc root
+      while (target.classList && !target.classList.contains("dropdown-menu") && target.parentNode) {
+        target = target.parentNode;
+      }
+
+      // If outside a dropdown-menu close the dropdown
+      if (!target.classList || !target.classList.contains("dropdown-menu")) {
+        this[this.lastTapped] = false;
+      }
+    },
     tokenStatusChange: function(hasToken) {
       if (hasToken) {
         this.userLoggedIn = true;
@@ -147,7 +172,7 @@ export default {
         this.lastTapped &&
         this.lastTapped != currentTapped)
       {
-        this[this.lastTapped] = false;
+        this[this.lastTapped] = false; // Tap a different nav = close the previous
       }
 
       // Toggle the new tap
