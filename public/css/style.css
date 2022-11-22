@@ -67,19 +67,26 @@ img {
 .component-padding {
     padding: 12px;
 }
+.component-padding__sides {
+    padding-left: 12px;
+    padding-right: 12px;
+}
 input {
     height: 2em;
 }
-section {
+.section-wrap {
+    width: 100%;
+}
+section, .section-width {
     width: 100%;
     margin: auto;
 
     transition: width .5s;
 }
-@media only screen and (min-width: 768px) { section { width: 768px; } }
-@media only screen and (min-width: 900px) { section { width: 900px; } }
-@media only screen and (min-width: 1024px) { section { width: 1024px; } }
-@media only screen and (min-width: 1200px) { section { width: 1200px; } }
+@media only screen and (min-width: 768px) { section, .section-width { width: 768px; } }
+@media only screen and (min-width: 900px) { section, .section-width { width: 900px; } }
+@media only screen and (min-width: 1024px) { section, .section-width { width: 1024px; } }
+@media only screen and (min-width: 1200px) { section, .section-width { width: 1200px; } }
 
 
 /* FONTS */

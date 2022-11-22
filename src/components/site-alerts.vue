@@ -1,16 +1,16 @@
 <template>
-  <div class="site__alerts">
-    <div class="site__alert__wrap" v-for="(alert, index) in alerts" :key="index">
+  <div class="section-wrap">
+    <section class="site__alert__wrap site__alerts" v-for="(alert, index) in alerts" :key="index">
       <div class="site__alert site__alert--success" v-if="alert.type == ALERT_SUCCESS" :class="{'site__alert--showing': alert.show}">
-        {{ alert.message }}
+        <div class="section-width component-padding__sides">{{ alert.message }}</div>
       </div>
       <div class="site__alert site__alert--warning" v-else-if="alert.type == ALERT_WARN" :class="{'site__alert--showing': alert.show}">
-        {{ alert.message }}
+        <div class="section-width component-padding__sides">{{ alert.message }}</div>
       </div>
       <div class="site__alert site__alert--error" v-else-if="alert.type == ALERT_ERROR" :class="{'site__alert--showing': alert.show}">
-        {{ alert.message }}
+        <div class="section-width component-padding__sides">{{ alert.message }}</div>
       </div>
-    </div>
+    </section>
   </div>
 </template>
 
@@ -46,7 +46,7 @@ export default {
 	created: function() {
     // Example
     // let vueContext = this;
-    // this.$store.dispatch(ALERT_ERROR, { 'message': 'This is an example ADDITIONAL error alert' })
+    this.$store.dispatch(ALERT_ERROR, { 'message': 'This is an example ADDITIONAL error alert' })
 	},
 	methods: {
     handleTransitions: function(id) {
@@ -70,10 +70,16 @@ export default {
   max-height: 0px;
   overflow: hidden;
   transition: all .2s;
+  font-size: 0;
 }
 .site__alerts .site__alert--showing {
   max-height: 200px;
-  padding: .6rem;
+  transition: all .2s;
+  font-size: inherit;
+}
+.site__alert--showing div {
+  padding-top: .6rem;
+  padding-bottom: .6rem;
   transition: all .2s;
 }
 .site__alert--success {
