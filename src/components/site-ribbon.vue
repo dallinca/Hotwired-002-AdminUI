@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import { VALIDATE_AUTH_TOKEN, CLEAR_AUTH_TOKEN } from '@/action-types'
+import { CLEAR_AUTH_TOKEN } from '@/action-types'
 import SiteAlerts from '@/components/site-alerts.vue'
 
 export default {
@@ -105,9 +105,6 @@ export default {
         document.removeEventListener("click", this.documentClickListener);
       }
     }
-  },
-  created: function() {
-    this.$store.dispatch(VALIDATE_AUTH_TOKEN);
   },
   methods: {
     documentClickListener: function(event) {

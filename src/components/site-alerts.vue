@@ -46,7 +46,7 @@ export default {
 	created: function() {
     // Example
     // let vueContext = this;
-    this.$store.dispatch(ALERT_ERROR, { 'message': 'This is an example ADDITIONAL error alert' })
+    // this.$store.dispatch(ALERT_ERROR, { 'message': 'This is an example ADDITIONAL error alert' })
 	},
 	methods: {
     handleTransitions: function(id) {

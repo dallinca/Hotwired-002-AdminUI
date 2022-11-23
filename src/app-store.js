@@ -13,6 +13,9 @@ const store = createStore({
       }
     },
     mutations: {
+        hasToken(state, bool) {
+            state.auth.hasToken = bool;
+        }
     },
     getters: {
         authToken (state) {
@@ -27,21 +30,21 @@ const store = createStore({
         [ALERT_SUCCESS] ({ dispatch }, payload) { dispatch(ALERT, {'type':ALERT_SUCCESS, 'message':payload.message}) },
         [ALERT_WARN] ({ dispatch }, payload) { dispatch(ALERT, {'type':ALERT_WARN, 'message':payload.message}) },
         [ALERT_ERROR] ({ dispatch }, payload) { dispatch(ALERT, {'type':ALERT_ERROR, 'message':payload.message}) },
-        [CLEAR_AUTH_TOKEN] ({ state }) {
-            state.auth.hasToken = false;
+        [CLEAR_AUTH_TOKEN] ({ commit }) {
+            commit('hasToken', false)
             document.cookie = "jwt=";
         },
-        [UPDATE_AUTH_TOKEN] ({ state, dispatch }, payload /* newToken: string */ ) {
+        [UPDATE_AUTH_TOKEN] ({ commit, dispatch }, payload /* newToken: string */ ) {
             if (payload.newToken) {
-                state.auth.hasToken = true;
+                commit('hasToken', true)
                 document.cookie = "jwt=" + payload.newToken;
             } else {
                 dispatch(CLEAR_AUTH_TOKEN);
             }
         },
-        [VALIDATE_AUTH_TOKEN] ({ getters, dispatch }) {
+        [VALIDATE_AUTH_TOKEN] ({ dispatch }) {
 			// Check if a token exists
-			var authToken = getters.authToken;
+			var authToken = document.cookie.replace(/(?:(?:^|.*;\s*)jwt\s*=\s*([^;]*).*$)|^.*$/, "$1");
 			if (!authToken) {
                 dispatch(CLEAR_AUTH_TOKEN);
 				return;
