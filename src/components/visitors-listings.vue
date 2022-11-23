@@ -31,6 +31,7 @@ export default {
         keyField: 'email',
         baseUrl: '/api/v1/admin/visitor/all',
         fieldKeys: ['email', 'codeExpirationTime', 'approvedForAccount'], 
+				viewBreakpoint: 680, 
 
 				limit: 10,
 				radius: 3

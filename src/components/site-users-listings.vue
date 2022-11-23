@@ -33,6 +33,7 @@ export default {
         keyField: 'name',
         baseUrl: '/api/v1/admin/siteUser/all',
         fieldKeys: ['name', 'email', 'canJoin', 'hostMax', 'guestMax', 'isGameDev'], 
+				viewBreakpoint: 700, 
 
 				limit: 5,
 				radius: 3

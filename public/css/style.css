@@ -504,6 +504,7 @@ tr:nth-child(odd) td {
     background-color: var(--brand-color-secondary-lighter);
 }
 tr:first-child th {
+    font-weight: 600;
     background-color: var(--brand-color-secondary);
     color: var(--brand-color-contrast);
     resize: horizontal;
@@ -515,6 +516,7 @@ td > div {
     position: relative;
 }
 
+/* TABLE--SIMPLE */
 table.table--simple {
     border-collapse: collapse;
     border: none;
@@ -530,6 +532,88 @@ table.table--simple td {
     background-color: var(--brand-color-canvas);
 }
 
+/**
+===============================
+===== STACK
+===============================
+**/
+.stack {
+    width: 100%;
+}
+.stack .sr {
+    border: 1px solid var(--brand-color-glyph);
+}
+.stack .sd {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+@media only screen and (min-width: 400px) { .stack .sd { grid-template-columns: 25% auto; } }
+
+.stack .sd .sd__label {
+    overflow: hidden;
+    font-weight: 600;
+    background-color: var(--brand-color-secondary);
+    color: var(--brand-color-contrast);
+}
+.stack .sd .sd__content {
+    overflow: hidden;
+}
+.stack, .sh, .sd {
+    border: 1px solid var(--brand-color-secondary-light);
+    background-color: var(--brand-color-canvas);
+    box-shadow: 0 0 2px var(--brand-color-glyph);
+}
+.sh, .sd .sd__label, .sd .sd__content {
+    padding: .6rem;
+}
+.sr:nth-child(even) .sd {
+    background-color: var(--brand-color-secondary-lighter);
+}
+.sr:nth-child(odd) .sd {
+    background-color: var(--brand-color-contrast);
+}
+.sr:first-child .sh {
+    font-weight: 600;
+    background-color: var(--brand-color-secondary);
+    color: var(--brand-color-contrast);
+}
+.sd > div {
+    display: grid;
+    align-items: center;
+    position: relative;
+}
+
+/* TABLE--SIMPLE */
+.stack.stack--simple {
+    border-collapse: collapse;
+    border: none;
+    background-color: var(--brand-color-canvas);
+    box-shadow: none;
+}
+.stack.stack--simple .sh, .stack.stack--simple .sd {
+    border: none;
+    box-shadow: none;
+}
+.stack.stack--simple .sr {
+    border: none;
+    border-top: 1px solid var(--brand-color-secondary-light);
+}
+.stack.stack--simple .sr:first-child {
+    border: none;
+    border-top: none;
+}
+.stack.stack--simple .sd:first-child {
+    border-top: none;
+}
+.stack.stack--simple .sd {
+    border-top: 1px solid var(--brand-color-secondary-light);
+}
+.stack.stack--simple .sr:nth-child(even) .sd {
+    
+}
+.stack.stack--simple .sr:nth-child(odd) .sd {
+    
+}
 
 /**
 ===============================

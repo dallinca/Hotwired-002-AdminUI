@@ -1,15 +1,27 @@
 <template>
-<section>
+<section ref="root">
 	<div class="component-padding">
-    <h1>{{ title }}</h1>
-    <table class="table--simple">
-      <tr>
-        <th v-for="fieldKey in pageItems.fieldKeys" :key="fieldKey">{{ fieldKey }}</th>
-      </tr>
-      <tr v-for="listing in pageItems.listings" :key="listing[keyField]">
-        <td v-for="fieldKey in pageItems.fieldKeys" :key="fieldKey"><slot v-bind:name=fieldKey v-bind="listing" v-bind:__fieldKey="fieldKey">{{ listing[fieldKey] }}</slot></td>
-      </tr>
-    </table>
+		<h1>{{ title }}</h1>
+		<div class="pagination-layout__table-wrap" v-if="tableView">
+			<table class="table--simple">
+			<tr>
+				<th v-for="fieldKey in pageItems.fieldKeys" :key="fieldKey">{{ fieldKey }}</th>
+			</tr>
+			<tr v-for="listing in pageItems.listings" :key="listing[keyField]">
+				<td v-for="fieldKey in pageItems.fieldKeys" :key="fieldKey"><slot v-bind:name=fieldKey v-bind="listing" v-bind:__fieldKey="fieldKey">{{ listing[fieldKey] }}</slot></td>
+			</tr>
+			</table>
+		</div>
+		<div class="pagination-layout__stack-wrap" v-if="!tableView">
+			<div class="stack stack--simple">
+				<div class="sr" v-for="listing in pageItems.listings" :key="listing[keyField]">
+					<div class="sd" v-for="fieldKey in pageItems.fieldKeys" :key="fieldKey">
+						<div class="sd__label" v-bind:title="fieldKey">{{ fieldKey }}</div>
+						<div class="sd__content"><slot v-bind:name=fieldKey v-bind="listing" v-bind:__fieldKey="fieldKey">{{ listing[fieldKey] }}</slot></div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<pagination-controls v-bind="paginationControls" @pageSelection="getPageItems"></pagination-controls>
 </section>
@@ -26,6 +38,7 @@ export default {
       keyField: { type: String, required: true },
       baseUrl: { type: String, required: true },
       fieldKeys: { type: Array },
+			viewBreakpoint: { type: Number, default: 800 },
 
       limit: { type: Number, default: 5 },
       radius: { type: Number, default: 3 }
@@ -38,6 +51,20 @@ export default {
     token() {
       return this.$store.getters.authToken;
     }
+	},
+	watch: {
+		sectionWidth: function(newValue) {
+			if (newValue > 500) {
+				this.tableView = true;
+			}
+		}
+	},
+	mounted() {
+		window.addEventListener("resize", this.rootResize)
+		this.rootResize();
+	},
+	unmounted() {
+		window.removeEventListener("resize", this.rootResize)
 	},
 	data: function() {
 		return {
@@ -54,6 +81,9 @@ export default {
         fieldKeys: this.fieldKeys || []
 			},
 
+			// Table view vs Stacked view
+			tableView: true,
+
 			// Mobile tapping data
 			siteNavTapped: false,
 			userNavTapped: false,
@@ -67,6 +97,10 @@ export default {
     this.getPageItems(1);
 	},
 	methods: {
+		rootResize: function() {
+			var sectionWidth = this.$refs.root.offsetWidth;
+			this.tableView = sectionWidth > this.viewBreakpoint;
+		},
 		getPageItems: function(newPage) {
       var params = window.__HW__.utils.formatUrlParams({
         page: newPage,
@@ -111,6 +145,9 @@ export default {
 		fieldUpdated: function({ idObject, newValue }) {
 			var recordToUpdate = this.pageItems.listings.find(listing => listing[this.keyField] == idObject[this.keyField])
 			recordToUpdate[idObject.__fieldKey] = newValue
+		},
+		updateViewType: function(viewType) {
+			this.viewType = viewType;
 		}
 	}
 }
@@ -118,5 +155,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.pagination-layout__table-wrap {
+	overflow-x: auto;
+	/*display: none;*/
+}
+/*
+@media only screen and (min-width: 768px) {
+	.pagination-layout__table { display: block; }
+	.pagination-layout__stacked { display: none; }
+}*/
 </style>

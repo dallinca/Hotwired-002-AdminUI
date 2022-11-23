@@ -23,7 +23,8 @@ export default {
         title: 'User Listings',
         keyField: 'name',
         baseUrl: '/api/v1/admin/user/all',
-        fieldKeys: ['name', 'email', 'permissions'], 
+        fieldKeys: ['name', 'email', 'permissions'],
+				viewBreakpoint: 700, 
 
 				limit: 5,
 				radius: 3
